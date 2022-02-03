@@ -1,3 +1,5 @@
+from ast import Global
+from discord.ext import tasks
 import requests
 import time
 import discord
@@ -13,6 +15,7 @@ url1 = 'https://api2.hiveos.farm/api/v2/farms/776169/workers/1669282/metrics'
 url2 = 'https://api2.hiveos.farm/api/v2/farms/776169/workers'
 hiveToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkiLCJpYXQiOjE2Mjg3OTQ3NjksImV4cCI6MTk0NDE1NDc2OSwibmJmIjoxNjI4Nzk0NzY5LCJqdGkiOjM5Njc1MDc0LCJzdWIiOjM5Njc1MDc0fQ.QwcvWJdodnvt9ZD9NkwPpFTiF7Yo_WFd2BUyZA-4R0Y"
 tempLimit = 48
+localTime = False
 client = discord.Client()
 
 #========================== FUNCTION ==========================#
@@ -25,8 +28,8 @@ client = discord.Client()
 
 def get_localtime():
     t = time.localtime()
-    current_time = time.strftime("%H:%M", t)
-    return (current_time)
+    current_time = time.strftime("%H", t)
+    return (int(current_time))
 
 def send_info():
     crazy_request = requests.get(url0).json()
@@ -37,12 +40,18 @@ def send_info():
 
 #========================== MAIN ==========================#
 
-# while (True):
-#     if (get_localtime() >= '00:30'):
-#         send_info()
+@tasks.loop(seconds = 3)
+async def get_day_info():
+    global localTime
+    if (get_localtime() == 16 and localTime == False):
+        localTime = True
+        send_info()
+    if (get_localtime() != 16):
+        localTime = False
 
 @client.event
 async def on_ready():
     print("Le bot est prêt !")
-    # client.loop.create_task(search_submissions(client, driver))
+    # find block check
+    get_day_info.start()
 client.run("OTIzNzM3NjgzMzMzOTA2NDUy.YcUXwQ.iDdyjXIHSMws9jv5v_iEIAqQPQM")
