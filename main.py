@@ -1,5 +1,6 @@
 import requests
 import time
+import discord
 from datetime import datetime, timedelta
 from datetime import date
 from requests.api import request
@@ -12,6 +13,7 @@ url1 = 'https://api2.hiveos.farm/api/v2/farms/776169/workers/1669282/metrics'
 url2 = 'https://api2.hiveos.farm/api/v2/farms/776169/workers'
 hiveToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkiLCJpYXQiOjE2Mjg3OTQ3NjksImV4cCI6MTk0NDE1NDc2OSwibmJmIjoxNjI4Nzk0NzY5LCJqdGkiOjM5Njc1MDc0LCJzdWIiOjM5Njc1MDc0fQ.QwcvWJdodnvt9ZD9NkwPpFTiF7Yo_WFd2BUyZA-4R0Y"
 tempLimit = 48
+client = discord.Client()
 
 #========================== FUNCTION ==========================#
 
@@ -35,6 +37,12 @@ def send_info():
 
 #========================== MAIN ==========================#
 
-while (True):
-    if (get_localtime() >= '00:30'):
-        send_info()
+# while (True):
+#     if (get_localtime() >= '00:30'):
+#         send_info()
+
+@client.event
+async def on_ready():
+    print("Le bot est prêt !")
+    # client.loop.create_task(search_submissions(client, driver))
+client.run("OTIzNzM3NjgzMzMzOTA2NDUy.YcUXwQ.iDdyjXIHSMws9jv5v_iEIAqQPQM")
