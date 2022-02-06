@@ -1,13 +1,15 @@
 import requests
 import time
 import discord
-from datetime import datetime, timedelta
-from datetime import date
-from requests.api import request
-from requests.models import Response
+from discord.ext import tasks
+from crazypool import crazy_block
 from get_info import *
+from lib_discord_epitech import set_embed_block
+from set_file import *
 
 #========================== INITIALIZE VARIABLE ==========================#
+crazyAPI_block = 'https://eth.crazypool.org/api/blocks'
+
 url0 = 'https://eth.crazypool.org/api/accounts/0xb35ff0343da28525fCE4BD49308920f2B8f7bEd4'
 url1 = 'https://api2.hiveos.farm/api/v2/farms/776169/workers/1669282/metrics'
 url2 = 'https://api2.hiveos.farm/api/v2/farms/776169/workers'
@@ -37,12 +39,19 @@ def send_info():
 
 #========================== MAIN ==========================#
 
-# while (True):
-#     if (get_localtime() >= '00:30'):
-#         send_info()
+@tasks.loop(seconds = 1)
+async def check_new_block():
+    rsp = requests.get(crazyAPI_block).json()['candidates']
+    if (str(rsp) != "None"):
+        height = str(rsp[0]['height'])
+        if (height != f_get_height()):
+            f_set_height(height)
+            message_l = crazy_block(rsp, height)
+            channel = client.get_channel(933874035966754946)
+            await channel.send("<@&924801318151925830>", embed = set_embed_block(message_l[0], message_l[1]))
 
 @client.event
 async def on_ready():
     print("Le bot est prêt !")
-    # client.loop.create_task(search_submissions(client, driver))
+    check_new_block.start()
 client.run("OTIzNzM3NjgzMzMzOTA2NDUy.YcUXwQ.iDdyjXIHSMws9jv5v_iEIAqQPQM")
