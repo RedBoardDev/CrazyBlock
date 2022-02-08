@@ -42,3 +42,7 @@ def get_status_temp(url1, hiveToken, tempLimit):
     for i in range(len(reponse)):
         if (reponse[i] > tempLimit): return (i)
     return (-1)
+
+def get_price_eth(etherscan_priceETH):
+    rsp = float(requests.get(etherscan_priceETH).json()['result']['ethusd'])
+    return (rsp)

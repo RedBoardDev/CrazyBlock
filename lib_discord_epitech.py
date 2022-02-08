@@ -1,0 +1,13 @@
+from datetime import datetime, timezone
+import discord
+
+def set_embed_block(field_name, message):
+    embed = discord.Embed(
+        title = "ETH | New block found !",
+        color = 0x1ABC9C
+    )
+    embed.add_field(name = field_name, value = message, inline = False)
+    embed.set_thumbnail(url = "https://c.tenor.com/WpekNE8saNQAAAAi/crazypool-logo-spin.gif")
+    embed.set_footer(text = "RedMining |", icon_url="https://cdn.discordapp.com/attachments/933874035966754946/940006924143968326/crazypool-logo-spin.png")
+    embed.timestamp = datetime.now(timezone.utc)
+    return (embed)
