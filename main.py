@@ -1,12 +1,9 @@
-from ast import Global
-from discord.ext import tasks
-import requests
 import time
 import discord
+from funct_config import *
 from discord.ext import tasks
-from crazypool import crazy_block, get_candidates
-from lib_discord_epitech import set_embed_block
-from set_file import *
+from lib_discord import set_embed_block
+from crazypool import block_info, get_candidates
 
 #========================== INITIALIZE VARIABLE ==========================#
 client = discord.Client()
@@ -19,6 +16,12 @@ def get_localtime():
     return (current_time)
 
 #========================== MAIN ==========================#
+async def send_allMessage(message_l):
+    account_l = f_get_account()
+    for i in range(len(account_l)):
+        channel = client.get_channel(account_l[i]['channel'])
+        role_id = "<@&" + account_l[i]['role_id'] + ">"
+        await channel.send(role_id, embed = set_embed_block(message_l[0], message_l[1]))
 
 @tasks.loop(seconds = 1)
 async def check_new_block():
@@ -27,12 +30,10 @@ async def check_new_block():
         height = str(rsp[0]['height'])
         if (height != f_get_height()):
             f_set_height(height)
-            message_l = crazy_block(rsp, height)
-            channel = client.get_channel(933874035966754946)
-            await channel.send("<@&924801318151925830>", embed = set_embed_block(message_l[0], message_l[1]))
-
+            message_l = block_info(rsp[0], height)
+            await send_allMessage(message_l)
 @client.event
 async def on_ready():
     print("Le bot est prêt !")
     check_new_block.start()
-client.run("OTIzNzM3NjgzMzMzOTA2NDUy.YcUXwQ.iDdyjXIHSMws9jv5v_iEIAqQPQM")
+client.run("OTQwNzQ4MjM5OTk1NTY4MTgw.YgL6Eg.v-_L5aIm5N8szEBxtKkBpQYrfm8")

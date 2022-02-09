@@ -16,3 +16,8 @@ def f_get_tempLimit():
     with open('config.yml', 'r') as file:
         data = yaml.safe_load(file)
     return(data['tempLimit'])
+
+def f_get_account():
+    with open('config.yml', 'r') as file:
+        data = yaml.safe_load(file)
+    return(data['account'])

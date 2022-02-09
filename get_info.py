@@ -1,6 +1,14 @@
 import requests
 from datetime import datetime, timedelta
 
+#========================== INITIALIZE VARIABLE ==========================#
+etherscan_priceETH = 'https://api.etherscan.io/api?module=stats&action=ethprice&apikey=VFKV6IWHAFQ3X8P948TCQEFVASCT7YF9QU'
+
+#========================== FUNCTION ==========================#
+
+def request_json(url):
+    return (requests.get(url).json())
+
 def get_mhs_hiveos(url1, hiveToken):
     mhs_hiveos = 0
     reponse = requests.get(url1, headers={'Authorization': 'Bearer ' + hiveToken}, params="period=1d").json()['data'][-1]['hashrates']
@@ -43,6 +51,6 @@ def get_status_temp(url1, hiveToken, tempLimit):
         if (reponse[i] > tempLimit): return (i)
     return (-1)
 
-def get_price_eth(etherscan_priceETH):
-    rsp = float(requests.get(etherscan_priceETH).json()['result']['ethusd'])
+def get_price_eth():
+    rsp = float(request_json(etherscan_priceETH)['result']['ethusd'])
     return (rsp)
