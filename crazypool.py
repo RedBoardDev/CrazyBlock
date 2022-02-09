@@ -10,10 +10,10 @@ etherscanAPI_blockInfo = 'https://api.etherscan.io/api?module=block&action=getbl
 def get_candidates():
     return (request_json(crazyAPI_block)['candidates'])
 
-def block_info(rsp, height):
+def block_info(rsp, height, round_share):
     rsp_request = request_json(etherscanAPI_blockInfo.replace("BLOCK_ID", height))['result']
     reward = int(rsp_request['blockReward']) / 1000000000000000000
-    reward_for_me = (0.014 * reward) / 100
+    reward_for_me = (round_share * reward) / 100
     price_eth = get_price_eth()
     reward_in_usd = reward_for_me * price_eth
     uncle = str(rsp['uncle'])

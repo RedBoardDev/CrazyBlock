@@ -1,10 +1,7 @@
 account:
   0:
-    channel: 940734553306304562
-    role_id: '924801318151925830'
+    channel: 933874035966754946
+    role_id: 924801318151925830
+    round_share: 0.014
     wallet: '0xd02073950ce250cb9ead35498b9def88385d6e2c'
-  1:
-    channel: 940740584161837147
-    role_id: '923738274458116096'
-    wallet: ouisdfv
-last_height: '14168718'
+last_height: '14171714'
