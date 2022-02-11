@@ -33,7 +33,6 @@ async def send_allMessage(rsp, height, embed_base):
         role_id = "<@&" + str(account_l[i]['role_id']) + ">"
         await channel.send(role_id, embed = set_embed_block(set_base_embed(), message_l[0], message_l[1])) # await obligatoire ? Je perd 1ms..
     print('------------------------------')
-    
 
 @tasks.loop()
 async def check_new_block(embed_base):
