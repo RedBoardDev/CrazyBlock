@@ -1,6 +1,7 @@
 import asyncio
 import discord
 from funct_config import *
+from datetime import datetime
 from get_info import get_price_eth
 from discord.ext import tasks, commands
 from lib_discord import set_base_embed, set_embed_block
@@ -17,6 +18,8 @@ def set_message(message, round_share, reward, price_eth):
     message = message.replace("reward_for_me", str(round(reward_for_me, 9)))
     reward_in_usd:float = reward_for_me * price_eth
     message = message.replace("reward_in_usd", str(round(reward_in_usd, 2)))
+    speed_test = str(datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
+    print(speed_test)
     return (message)
 
 async def send_allMessage(rsp, height, embed_base):
@@ -28,7 +31,9 @@ async def send_allMessage(rsp, height, embed_base):
         message_l[1] = set_message(message_l[1], round_share, message_l[2], price_eth)
         channel = discord_cmd.get_channel(account_l[i]['channel'])
         role_id = "<@&" + str(account_l[i]['role_id']) + ">"
-        await channel.send(role_id, embed = set_embed_block(embed_base, message_l[0], message_l[1]))
+        await channel.send(role_id, embed = set_embed_block(set_base_embed(), message_l[0], message_l[1])) # await obligatoire ? Je perd 1ms..
+    print('------------------------------')
+    
 
 @tasks.loop()
 async def check_new_block(embed_base):

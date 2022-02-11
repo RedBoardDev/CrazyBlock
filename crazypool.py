@@ -1,5 +1,4 @@
 import requests
-from datetime import datetime
 from get_info import request_json
 
 #========================== INITIALIZE VARIABLE ==========================#
@@ -18,7 +17,6 @@ def block_info(rsp, height, price_eth):
     orphan = str(rsp['orphan'])
     link = "https://etherscan.io/block/" + str(height)
     message = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n"
-    speed_test = str(datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'))
-    message = message + "Uncle : " + uncle + "\nOrphan : " + orphan + "\nPrice ETH : " + str(price_eth) + "$\n" + link + "\nSpeed test bot 2: " + speed_test
+    message = message + "Uncle : " + uncle + "\nOrphan : " + orphan + "\nPrice ETH : " + str(price_eth) + "$\n" + link
     message_l = ["Reward : " + str(round(reward, 9)) + " ETH", message, reward]
     return (message_l)
