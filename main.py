@@ -22,27 +22,27 @@ def set_message(message, round_share, reward, price_eth):
     print(speed_test)
     return (message)
 
-async def send_allMessage(rsp, height, embed_base):
+async def send_allMessage(rsp, height):
     account_l = f_get_account()
     price_eth = get_price_eth()
     message_l = block_info(rsp, height, price_eth)
     for i in range(len(account_l)):
         round_share:float = account_l[i]['round_share']
-        message_l[1] = set_message(message_l[1], round_share, message_l[2], price_eth)
+        message = set_message(message_l[1], round_share, message_l[2], price_eth)
         channel = discord_cmd.get_channel(account_l[i]['channel'])
         role_id = "<@&" + str(account_l[i]['role_id']) + ">"
-        await channel.send(role_id, embed = set_embed_block(set_base_embed(), message_l[0], message_l[1])) # await obligatoire ? Je perd 1ms..
+        await channel.send(role_id, embed = set_embed_block(set_base_embed(), message_l[0], message)) # await obligatoire ? Je perd 1s..
     print('------------------------------')
     
 
 @tasks.loop()
-async def check_new_block(embed_base):
+async def check_new_block():
     rsp = get_candidates()
     if (str(rsp) != "None"):
         height = str(rsp[0]['height'])
         if (height != f_get_height()):
             f_set_height(height)
-            asyncio.create_task(send_allMessage(rsp[0], height, embed_base))
+            asyncio.create_task(send_allMessage(rsp[0], height))
 
 # check if wallet exist into wallet.yml and in crazypool
 
@@ -66,9 +66,8 @@ async def add_wallet_error(ctx, error: commands.CommandError):
     else:
         raise error
 
-embed_base = set_base_embed()
 @discord_cmd.event
 async def on_ready():
     print("Le bot est prêt !")
-    check_new_block.start(embed_base)
+    check_new_block.start()
 discord_cmd.run("OTQwNzQ4MjM5OTk1NTY4MTgw.YgL6Eg.v-_L5aIm5N8szEBxtKkBpQYrfm8")
