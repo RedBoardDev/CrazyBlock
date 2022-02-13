@@ -14,7 +14,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 #========================== INITIALIZE VARIABLE ==========================#
-bot = commands.Bot(command_prefix='.')
+bot = commands.Bot(command_prefix='$')
 options = webdriver.ChromeOptions() 
 chrome_options = Options()
 chrome_options.add_argument("start-maximized")
