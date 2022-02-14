@@ -21,7 +21,7 @@ class Test_notif(commands.Cog):
             channel = self.bot.get_channel(data['channel'])
             role_id = "<@&" + str(data['role_id']) + "> Notification test"
             await asyncio.create_task(permission_send_message(ctx.me, channel))
-            await channel.send(role_id, embed = set_embed_block(set_base_embed("ETH | New block found !", 0x1ABC9C), message_l[0], message))
+            await channel.send(role_id, embed = set_embed_block(set_base_embed("ETH | New block found !", "", 0x1ABC9C), message_l[0], message))
 
     @test_notif_cmd.error
     async def add_wallet_error(self, ctx, error: commands.CommandError):

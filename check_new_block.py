@@ -1,7 +1,7 @@
 import asyncio
 from discord.ext import tasks
 from funct_config import f_get_height, f_set_height
-from crazypool import get_candidates
+from get_info import get_candidates
 from send_notification import send_allMessage
 
 @tasks.loop()

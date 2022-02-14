@@ -1,4 +1,4 @@
-from crazypool import block_info
+from get_info import block_info
 from get_info import get_price_eth
 from funct_config import f_get_account
 from lib_discord import set_base_embed, set_embed_block
@@ -20,4 +20,4 @@ async def send_allMessage(rsp, height, bot):
         channel = bot.get_channel(account_l[i]['channel'])
         role_id = "<@&" + str(account_l[i]['role_id']) + ">"
         # await asyncio.create_task(permission_send_message(ctx.me, channel)) # A FAIRE
-        await channel.send(role_id, embed = set_embed_block(set_base_embed("ETH | New block found !", 0x1ABC9C), message_l[0], message))
+        await channel.send(role_id, embed = set_embed_block(set_base_embed("ETH | New block found !", "", 0x1ABC9C), message_l[0], message))

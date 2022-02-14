@@ -1,10 +1,11 @@
 import discord
 from get_info import get_localtime
 
-def set_base_embed(title, color):
+def set_base_embed(title, description, color):
     embed = discord.Embed(
         title = title,
-        color = color
+        color = color,
+        description = description
     )
     embed.set_footer(text = "RedMining |", icon_url = "https://cdn.discordapp.com/attachments/933874035966754946/940006924143968326/crazypool-logo-spin.png")
     embed.timestamp = get_localtime()
