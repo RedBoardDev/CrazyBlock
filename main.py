@@ -2,10 +2,9 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 from check_new_block import check_new_block
-from commands import help_command
 
 #========================== INITIALIZE VARIABLE ==========================#
-bot = commands.Bot(command_prefix='.', help_command = help_command.Help_command())
+bot = commands.Bot(command_prefix='.', help_command = None)
 
 #========================== MAIN ==========================#
 
