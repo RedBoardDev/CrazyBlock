@@ -2,7 +2,7 @@ import asyncio
 from discord.ext import commands
 from funct_config import f_find_account
 from lib_discord import set_embed_block, set_base_embed, permission_send_message
-from main import set_message
+from send_notification import set_message
 
 class Test_notif(commands.Cog):
     def __init__(self, bot):

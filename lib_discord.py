@@ -6,7 +6,7 @@ def set_base_embed(title, color):
         title = title,
         color = color
     )
-    embed.set_footer(text = "RedMining |", icon_url="https://cdn.discordapp.com/attachments/933874035966754946/940006924143968326/crazypool-logo-spin.png")
+    embed.set_footer(text = "RedMining |", icon_url = "https://cdn.discordapp.com/attachments/933874035966754946/940006924143968326/crazypool-logo-spin.png")
     embed.timestamp = get_localtime()
     return (embed)
 
