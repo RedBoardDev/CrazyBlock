@@ -8,7 +8,6 @@ from send_notification import send_allMessage
 @tasks.loop()
 async def check_new_block(bot):
     rsp = get_candidates()
-    print(datetime.now())
     if (str(rsp) != "None"):
         height = str(rsp[0]['height'])
         if (height != f_get_height()):

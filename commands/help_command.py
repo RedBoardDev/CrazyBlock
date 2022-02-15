@@ -1,7 +1,5 @@
-import discord
 from discord.ext import commands
-from funct_config import f_find_account
-from lib_discord import set_base_embed, set_embed_info
+from lib_discord import set_base_embed
 
 class Help_command(commands.Cog):
     def __init__(self, bot):
@@ -10,7 +8,6 @@ class Help_command(commands.Cog):
     @commands.group(invoke_without_command = True)
     async def help(self, ctx):
         em = set_base_embed("Help", "Use $help <command>\n Prefix: $", 0x95a5a6)
-        # em = discord.Embed(title = "Help", description = "Use $help <command>\n Prefix: $")
         cmd_list = "add_account - add notification\n"
         cmd_list += "modify_account - modify your notification\n"
         cmd_list += "find_account - view account information\n"
@@ -19,7 +16,7 @@ class Help_command(commands.Cog):
         await ctx.send(embed = em)
 
     @help.command()
-    async def add(self, ctx):
+    async def add_account(self, ctx):
         em = set_base_embed("Help - $add_account", "$add_account <wallet> <round_share> <channel> <role>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool\n"
         args_list += "round_share - your round share (ex: `0.05`)\n"
@@ -29,7 +26,7 @@ class Help_command(commands.Cog):
         await ctx.send(embed = em)
     
     @help.command()
-    async def add(self, ctx):
+    async def modify_account(self, ctx):
         em = set_base_embed("Help - $modify_account", "$modify_account <wallet> <round_share> <channel> <role>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool\n"
         args_list += "round_share - your round share (ex: `0.05`)\n"
@@ -39,14 +36,14 @@ class Help_command(commands.Cog):
         await ctx.send(embed = em)
 
     @help.command()
-    async def add(self, ctx):
+    async def find_account(self, ctx):
         em = set_base_embed("Help - $find_account", "$find_account <wallet>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool recorded\n"
         em.add_field(name = "Arguments", value = args_list)
         await ctx.send(embed = em)
 
     @help.command()
-    async def add(self, ctx):
+    async def test_notif(self, ctx):
         em = set_base_embed("Help - $test_notif", "$test_notif <wallet>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool recorded\n"
         em.add_field(name = "Arguments", value = args_list)

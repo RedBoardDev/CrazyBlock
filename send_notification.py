@@ -3,7 +3,7 @@ from get_info import get_price_eth
 from funct_config import f_get_account
 from lib_discord import set_base_embed, set_embed_block
 
-def set_message(message, round_share, reward, price_eth):
+def set_message(message:str, round_share, reward, price_eth):
     reward_for_me = (round_share * reward) / 100
     message = message.replace("reward_for_me", str(round(reward_for_me, 9)))
     reward_in_usd:float = reward_for_me * price_eth
