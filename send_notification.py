@@ -15,9 +15,10 @@ async def send_allMessage(rsp, height, bot):
     price_eth = get_price_eth()
     message_l = block_info(rsp, height, price_eth, "- %")
     for i in range(len(account_l)):
-        round_share:float = account_l[i]['round_share']
+        i_account = account_l[i]
+        round_share:float = i_account['round_share']
         message = set_message(message_l[1], round_share, message_l[2], price_eth)
-        channel = bot.get_channel(account_l[i]['channel'])
-        role_id = "<@&" + str(account_l[i]['role_id']) + ">"
+        channel = bot.get_channel(i_account['channel'])
+        role_id = "<@&" + str(i_account['role_id']) + ">"
         # await asyncio.create_task(permission_send_message(ctx.me, channel)) # A FAIRE
         await channel.send(role_id, embed = set_embed_block(set_base_embed("ETH | New block found !", "", 0x1ABC9C), message_l[0], message))
