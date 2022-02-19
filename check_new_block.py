@@ -22,4 +22,4 @@ async def check_new_block(bot):
             if (height > f_get_height()):
                 print(height)
                 f_set_height(height)
-                asyncio.create_task(send_allMessage(rsp[0], str(height), bot))
+                asyncio.create_task(send_allMessage(height, bot))
