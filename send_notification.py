@@ -10,10 +10,10 @@ def set_message(message:str, round_share, reward, price_eth):
     message = message.replace("reward_in_usd", str(round(reward_in_usd, 2)))
     return (message)
 
-async def send_allMessage(rsp, height, bot):
+async def send_allMessage(height, bot):
     account_l = f_get_account()
     price_eth = get_price_eth()
-    message_l = block_info(rsp, height, price_eth, "- %")
+    message_l = block_info(height, price_eth, "- %")
     for i in range(len(account_l)):
         i_account = account_l[i]
         round_share:float = i_account['round_share']
