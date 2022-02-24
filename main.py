@@ -4,7 +4,7 @@ from discord.ext import commands
 from check_new_block import check_new_block
 
 #========================== INITIALIZE VARIABLE ==========================#
-bot = commands.Bot(command_prefix='$', help_command = None)
+bot = commands.Bot(command_prefix = '$', help_command = None)
 
 #========================== MAIN ==========================#
 
