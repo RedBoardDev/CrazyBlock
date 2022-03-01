@@ -11,7 +11,8 @@ class Help_command(commands.Cog):
         cmd_list = "add_wallet - add notification\n"
         cmd_list += "modify_wallet - modify your notification\n"
         cmd_list += "find_wallet - view account information\n"
-        cmd_list += "test_notif - test notification"
+        cmd_list += "test_notif - test notification\n"
+        cmd_list += "setnotif - set settings notification"
         em.add_field(name = "Commands", value = cmd_list)
         await ctx.send(embed = em)
 
@@ -46,6 +47,15 @@ class Help_command(commands.Cog):
     async def test_notif(self, ctx):
         em = set_base_embed("Help - $test_notif", "$test_notif <wallet>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool recorded\n"
+        em.add_field(name = "Arguments", value = args_list)
+        await ctx.send(embed = em)
+
+    @help.command()
+    async def setnotif(self, ctx):
+        em = set_base_embed("Help - $setnotif", "$test_notif <wallet> <settings> <flags>", 0x95a5a6)
+        args_list = "wallet - your wallet crazypool recorded\n"
+        args_list += "settings - parameter to modify (ex: ""blocks"")\n"
+        args_list += "flags - true or false"
         em.add_field(name = "Arguments", value = args_list)
         await ctx.send(embed = em)
 

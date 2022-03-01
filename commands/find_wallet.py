@@ -12,8 +12,10 @@ class Find_wallet(commands.Cog):
             await ctx.send('I couldn''t find this wallet into database...')
         else:
             field_name = str(data['wallet'])
-            message = "Role_id: " + str(data['channel']) + "\nRole_id: " + str(data['role_id']) + "\nRound share: " + str(data['round_share'])
-            await ctx.send(embed = set_embed_info(set_base_embed("About this wallet...", "", 0x1ABC9C), field_name, message))
+            message = "Channel_id: " + str(data['channel']) + "\nRole_id: " + str(data['role_id']) + "\nRound share: " + str(data['round_share'])
+            field_name_1 = "Notification parameter"
+            message_1 = "Blocks: " + str(data['settings']['blocks']) + "\nPayments: " + str(data['settings']['payments'])
+            await ctx.send(embed = set_embed_info(set_base_embed("About this wallet...", "", 0x1ABC9C), field_name, message, field_name_1, message_1))
 
     @find_wallet_cmd.error
     async def add_wallet_error(self, ctx, error: commands.CommandError):
