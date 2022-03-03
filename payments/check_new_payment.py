@@ -1,6 +1,4 @@
-import asyncio
 from discord.ext import tasks
-from perfplot import save
 from get_info import request_json
 from send_notification import send_notif_payments
 from funct_config import f_get_tx, f_set_tx, f_find_account
