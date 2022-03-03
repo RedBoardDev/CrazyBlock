@@ -16,6 +16,7 @@ def block_info(height, price_eth, luck):
     rsp_request = request_json(etherscanAPI_blockInfo.replace("BLOCK_ID", str(height)))['result']
 
     if (check_if_uncle(rsp_request['blockMiner'])):
+        print("blockMiner uncle:", rsp_request['blockMiner'])
         height = height + 1
         reward = 1.75
         uncle = "True"

@@ -4,7 +4,7 @@ from funct_config import f_find_account, f_set_flags_settings
 class Notification(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name = "setnotif")
+    @commands.command(name = "set_notif")
     async def cmd_setnotification(self, ctx, wallet:str, param:str, flags:bool):
         data = f_find_account(wallet)
         if (data == None):

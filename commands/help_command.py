@@ -52,7 +52,7 @@ class Help_command(commands.Cog):
 
     @help.command()
     async def setnotif(self, ctx):
-        em = set_base_embed("Help - $setnotif", "$test_notif <wallet> <settings> <flags>", 0x95a5a6)
+        em = set_base_embed("Help - $setnotif", "$set_notif <wallet> <settings> <flags>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool recorded\n"
         args_list += "settings - parameter to modify (ex: ""blocks"")\n"
         args_list += "flags - true or false"
