@@ -18,10 +18,6 @@ def get_x_payment(x:int):
 async def check_all_tx(bot, req_json):
     address = req_json['address']
     account = f_find_account(address)
-    if (account != None):
-        print(account['wallet'], address)
-    else:
-        print("None", address)
     if (account != None and account['wallet'] == address):
         if (account['settings']['payments'] == True):
             await send_notif_payments(req_json, account, bot)
@@ -34,6 +30,8 @@ async def check_new_payment(bot):
     i:int = 0
     save_tx = f_get_tx()
     while (True):
+        if (i >= 30):
+            break
         req_json = get_x_payment(i)
         tx = req_json['tx']
         if (tx == save_tx):

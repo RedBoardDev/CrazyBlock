@@ -23,7 +23,7 @@ async def send_notif_block(height, bot):
             role_id = "<@&" + str(i_account['role_id']) + ">"
             # await asyncio.create_task(permission_send_message(ctx.me, channel)) # A FAIRE
             embed = set_embed_block(set_base_embed("ETH | New block found !", "", 0x1ABC9C), message_l[0], message)
-            await channel.send(role_id + " | New block found", embed = embed)
+            await channel.send(role_id + " | " + str(round(message_l[2], 2)) + " ETH", embed = embed)
 
 async def send_notif_payments(last_payement, account, bot):
     price_eth = get_price_eth()
