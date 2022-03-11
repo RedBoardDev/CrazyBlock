@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 from blocks.check_new_block import check_new_block
-from payments.check_new_payment import check_new_payment
+from check_new_payment import check_new_payment
 
 #========================== INITIALIZE VARIABLE ==========================#
 bot = commands.Bot(command_prefix = '$', help_command = None)
