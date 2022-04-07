@@ -1,5 +1,6 @@
 from blocks.get_info_block import block_info
 from get_info import get_price_eth
+from get_info import request_json
 from funct_config import f_get_account
 from lib_discord import set_base_embed, set_embed_block, set_embed_payments
 
@@ -10,6 +11,11 @@ def set_message(message:str, round_share, reward, price_eth):
     message = message.replace("reward_in_usd", str(round(reward_in_usd, 2)))
     return (message)
 
+def get_round_share(wallet:str):
+    url = "https://api.crazypool.org/api/v1/eth/miners/" + wallet + "/round-shares"
+    req:int = request_json(url)
+    return ((float)(req / 30001))
+
 async def send_notif_block(height, bot):
     account_l = f_get_account()
     price_eth = get_price_eth()
@@ -17,7 +23,7 @@ async def send_notif_block(height, bot):
     for i in range(len(account_l)):
         i_account = account_l[i]
         if (i_account['settings']['blocks'] == True):
-            round_share:float = i_account['round_share']
+            round_share:float = get_round_share(i_account['wallet'])
             message = set_message(message_l[1], round_share, message_l[2], price_eth)
             channel = bot.get_channel(i_account['channel'])
             role_id = "<@&" + str(i_account['role_id']) + ">"
