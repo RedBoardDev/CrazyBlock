@@ -15,8 +15,8 @@ def set_message(message:str, round_share, reward, price_eth):
 
 def get_round_share(wallet:str):
     url = "https://api.crazypool.org/api/v1/eth/miners/" + wallet + "/round-shares"
-    req:int = request_json(url)
-    return ((float)(req / 30001))
+    req = request_json(url)['data']
+    return ((float)(req / 3001))
 
 async def send_notif_block(height, bot):
     account_l = f_get_account()
