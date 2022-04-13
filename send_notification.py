@@ -1,4 +1,3 @@
-from matplotlib.pyplot import get
 import get_luck
 from blocks.get_info_block import block_info
 from get_info import get_price_eth
