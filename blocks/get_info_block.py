@@ -7,7 +7,7 @@ etherscanAPI_blockInfo = 'https://api.etherscan.io/api?module=block&action=getbl
 #========================== FUNCTION ==========================#
 
 def get_candidates():
-    return (request_json(crazyAPI_block)['candidates'])
+    return (request_json('https://eth.crazypool.org/api/blocks')['candidates'])
 
 def check_if_uncle(blockMiner):
     return (blockMiner != "0x4f9bebe3adc3c7f647c0023c60f91ac9dffa52d5")
@@ -25,7 +25,7 @@ def block_info(height, price_eth, luck):
         uncle = "False"
 
     link = "https://etherscan.io/block/" + str(height)
-    message = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n" + "Luck : " + luck + '\n'
+    message = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n" + "Luck : " + (str)(luck) + '\n'
     message = message + "Uncle : " + uncle + "\nPrice ETH : " + str(price_eth) + "$\n" + link
     message_l = ["Reward : " + str(round(reward, 9)) + " ETH", message, reward]
     return (message_l)

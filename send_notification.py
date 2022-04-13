@@ -1,3 +1,5 @@
+from matplotlib.pyplot import get
+import get_luck
 from blocks.get_info_block import block_info
 from get_info import get_price_eth
 from get_info import request_json
@@ -19,7 +21,7 @@ def get_round_share(wallet:str):
 async def send_notif_block(height, bot):
     account_l = f_get_account()
     price_eth = get_price_eth()
-    message_l = block_info(height, price_eth, "- %")
+    message_l = block_info(height, price_eth, get_luck.luck_CP)
     for i in range(len(account_l)):
         i_account = account_l[i]
         if (i_account['settings']['blocks'] == True):
