@@ -25,7 +25,7 @@ def block_info(height, price_eth, luck):
         uncle = "False"
 
     link = "https://etherscan.io/block/" + str(height)
-    message = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n" + "Luck : " + (str)(luck) + '\n'
+    message = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n" + "Luck : " + (str)(luck) + '%\n'
     message = message + "Uncle : " + uncle + "\nPrice ETH : " + str(price_eth) + "$\n" + link
     message_l = ["Reward : " + str(round(reward, 9)) + " ETH", message, reward]
     return (message_l)
