@@ -35,13 +35,12 @@ def f_get_account():
         data = orjson.loads(file.read())
     return(data['account'])
 
-def f_add_account(wallet, round_share, channel, role_id):
+def f_add_account(wallet, channel, role_id):
     with open('data.json', 'r') as file:
         data = orjson.loads(file.read())
     node = {}
     node['channel'] = channel
     node['role_id'] = role_id
-    node['round_share'] = round_share
     node['wallet'] = wallet
     node['settings'] = {"blocks": True, "payments": True}
     data['account'].append(node)
@@ -57,13 +56,12 @@ def f_find_index_account(wallet):
             return (x)
     return (None)
 
-def f_modify_account(wallet, round_share, channel, role_id):
+def f_modify_account(wallet, channel, role_id):
     with open('data.json', 'r') as file:
         data = orjson.loads(file.read())
     node = f_find_account(wallet)
     node['channel'] = channel
     node['role_id'] = role_id
-    node['round_share'] = round_share
     node['wallet'] = wallet
     data['account'][f_find_index_account(wallet)] = node
     with open('data.json', 'w') as file:
@@ -73,6 +71,8 @@ def f_find_account(wallet):
     with open('data.json', 'r') as file:
         data1 = orjson.loads(file.read())
         data = data1['account']
+    if (len(data) == 0):
+        return (None)
     for x in range(len(data)):
         if (data[x]['wallet'] == wallet):
             return (data[x])

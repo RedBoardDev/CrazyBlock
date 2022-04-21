@@ -4,7 +4,6 @@ from lib_discord import set_base_embed
 class Help_command(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    # @commands.command(name = "help")
     @commands.group(invoke_without_command = True)
     async def help(self, ctx):
         em = set_base_embed("Help", "Use $help <command>\n Prefix: $", 0x95a5a6)
@@ -18,19 +17,17 @@ class Help_command(commands.Cog):
 
     @help.command()
     async def add_wallet(self, ctx):
-        em = set_base_embed("Help - $add_wallet", "$add_wallet <wallet> <round_share> <channel> <role>", 0x95a5a6)
+        em = set_base_embed("Help - $add_wallet", "$add_wallet <wallet> <channel> <role>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool\n"
-        args_list += "round_share - your round share (ex: `0.05`)\n"
         args_list += "channel - tag the channel for notification\n"
         args_list += "role - tag the rôle who will be notified"
         em.add_field(name = "Arguments", value = args_list)
         await ctx.send(embed = em)
-    
+
     @help.command()
     async def modify_wallet(self, ctx):
-        em = set_base_embed("Help - $modify_wallet", "$modify_wallet <wallet> <round_share> <channel> <role>", 0x95a5a6)
+        em = set_base_embed("Help - $modify_wallet", "$modify_wallet <wallet> <channel> <role>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool\n"
-        args_list += "round_share - your round share (ex: `0.05`)\n"
         args_list += "channel - tag the channel for notification\n"
         args_list += "role - tag the rôle who will be notified"
         em.add_field(name = "Arguments", value = args_list)

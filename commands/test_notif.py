@@ -7,17 +7,16 @@ from send_notification import set_message
 class Test_notif(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name = "test")
+    @commands.command(name = "test_notif")
     async def test_notif_cmd(self, ctx, wallet:str):
         data = f_find_account(wallet)
         if (data == None):
             await ctx.send('I couldn''t find this wallet into database...')
         else:
-            round_share:float = data['round_share']
             message = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n"
             message = message + "Uncle : False\nOrphan : False\nPrice ETH : 666$\nhttps://etherscan.io/block/666"
             message_l = ["Reward : 6.666 ETH", message, 6.666]
-            message = set_message(message_l[1], round_share, message_l[2], 6.666)
+            message = set_message(message_l[1], 1, message_l[2], 6.666)
             channel = self.bot.get_channel(data['channel'])
             role_id = "<@&" + str(data['role_id']) + "> Notification test"
             await asyncio.create_task(permission_send_message(ctx.me, channel))

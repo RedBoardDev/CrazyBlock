@@ -6,9 +6,9 @@ class Modify_wallet(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     @commands.command(name = "modify_wallet")
-    async def modify_wallet_cmd(self, ctx, wallet: str, round_share:float, channel: discord.TextChannel, role: discord.User):
+    async def modify_wallet_cmd(self, ctx, wallet: str, channel: discord.TextChannel, role: discord.Role):
         if (f_find_account(wallet) != None):
-            f_modify_account(wallet, round_share, channel.id, role.id)
+            f_modify_account(wallet, channel.id, role.id)
             await ctx.send("User modify successfully !")
         else:
             await ctx.send('I couldn''t find this wallet into database...')
@@ -23,5 +23,6 @@ class Modify_wallet(commands.Cog):
                 await ctx.send('Error: $add_wallet wallet channel_id role_id')
         elif isinstance(error, commands.CommandNotFound):
             await ctx.send('Command not found...')
+
 def setup(bot):
     bot.add_cog(Modify_wallet(bot))
