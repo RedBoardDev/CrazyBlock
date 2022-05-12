@@ -19,7 +19,7 @@ def get_round_share(wallet:str):
 async def send_notif_block(block_l, height, bot):
     account_l = f_get_account()
     price_eth = get_price_eth()
-    message_l = block_info(block_l, height, price_eth, round(int(block_l["current_luck_calculated"]), 2))
+    message_l = block_info(block_l, height, price_eth)
     for i in range(len(account_l)):
         i_account = account_l[i]
         if (i_account['settings']['blocks'] == True):

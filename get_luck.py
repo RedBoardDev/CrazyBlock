@@ -8,7 +8,7 @@ crazyAPI_stats = 'https://eth.crazypool.org/api/stats'
 
 #========================== FUNCTION ==========================#
 
-@tasks.loop(seconds=300)
+@tasks.loop(seconds=60)
 async def get_luck(bot):
     req = request_json(crazyAPI_stats)
     difficulty = req['nodes'][0]['difficulty']
