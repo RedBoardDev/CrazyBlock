@@ -5,13 +5,11 @@ from discord.ext import tasks
 
 #========================== INITIALIZE VARIABLE ==========================#
 crazyAPI_stats = 'https://eth.crazypool.org/api/stats'
-luck_CP:float
 
 #========================== FUNCTION ==========================#
 
 @tasks.loop(seconds=300)
 async def get_luck(bot):
-    global luck_CP
     req = request_json(crazyAPI_stats)
     difficulty = req['nodes'][0]['difficulty']
     roundshares = req['stats']['roundShares']
