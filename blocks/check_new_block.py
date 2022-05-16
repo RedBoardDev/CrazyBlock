@@ -9,7 +9,7 @@ async def check_new_block(bot):
     rsp = get_candidates()
     if (str(rsp) != "None"):
         for block_l in reversed(rsp):
-            height = int(block_l['height'])
+            height = int(block_l['block_number'])
             if (height > f_get_height()):
                 f_set_height(height)
-                asyncio.create_task(send_notif_block(height, bot))
+                asyncio.create_task(send_notif_block(block_l, height, bot))
