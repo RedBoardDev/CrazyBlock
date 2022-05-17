@@ -16,7 +16,7 @@ class Help_command(commands.Cog):
         await ctx.send(embed = em)
 
     @help.command()
-    async def add_wallet(self, ctx):
+    async def addwallet(self, ctx):
         em = set_base_embed("Help - $addwallet", "$add_wallet <wallet> <channel> <role>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool\n"
         args_list += "channel - tag the channel for notification\n"
@@ -25,7 +25,7 @@ class Help_command(commands.Cog):
         await ctx.send(embed = em)
 
     @help.command()
-    async def modify_wallet(self, ctx):
+    async def modifywallet(self, ctx):
         em = set_base_embed("Help - $modifywallet", "$modify_wallet <wallet> <channel> <role>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool\n"
         args_list += "channel - tag the channel for notification\n"
@@ -34,14 +34,14 @@ class Help_command(commands.Cog):
         await ctx.send(embed = em)
 
     @help.command()
-    async def find_wallet(self, ctx):
+    async def findwallet(self, ctx):
         em = set_base_embed("Help - $findwallet", "$find_wallet <wallet>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool recorded\n"
         em.add_field(name = "Arguments", value = args_list)
         await ctx.send(embed = em)
 
     @help.command()
-    async def test_notif(self, ctx):
+    async def testnotif(self, ctx):
         em = set_base_embed("Help - $testnotif", "$test_notif <wallet>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool recorded\n"
         em.add_field(name = "Arguments", value = args_list)
