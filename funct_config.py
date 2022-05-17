@@ -42,6 +42,7 @@ def f_add_account(wallet, channel, role_id):
     node['channel'] = channel
     node['role_id'] = role_id
     node['wallet'] = wallet
+    node['currency'] = 'USD'
     node['settings'] = {"blocks": True, "payments": True}
     data['account'].append(node)
     with open('data.json', 'w') as file:

@@ -5,7 +5,7 @@ from funct_config import f_add_account, f_find_account
 class Add_wallet(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name = "add_wallet")
+    @commands.command(name = "addwallet")
     async def add_wallet_cmd(self, ctx, wallet: str, channel: discord.TextChannel, role: discord.Role):
         if (f_find_account(wallet) == None):
             f_add_account(wallet, channel.id, role.id)
