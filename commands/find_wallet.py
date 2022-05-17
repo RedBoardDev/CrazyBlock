@@ -5,7 +5,7 @@ from lib_discord import set_base_embed, set_embed_info
 class Find_wallet(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name = "find_wallet")
+    @commands.command(name = "findwallet")
     async def find_wallet_cmd(self, ctx, wallet:str):
         data = f_find_account(wallet)
         if (data == None):

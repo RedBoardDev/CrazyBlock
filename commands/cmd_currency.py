@@ -1,19 +1,19 @@
 import discord
 from discord.ext import commands
-from funct_config import f_find_account, f_modify_account
+from funct_config import f_add_account, f_find_account
 
-class Modify_wallet(commands.Cog):
+class Change_currency(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name = "modifywallet")
-    async def modify_wallet_cmd(self, ctx, wallet: str, channel: discord.TextChannel, role: discord.Role):
-        if (f_find_account(wallet) != None):
-            f_modify_account(wallet, channel.id, role.id)
-            await ctx.send("User modify successfully !")
+    @commands.command(name = "setcurrency")
+    async def change_currency_cmd(self, ctx, wallet: str, channel: discord.TextChannel, role: discord.Role):
+        if (f_find_account(wallet) == None):
+            f_add_account(wallet, channel.id, role.id)
+            await ctx.send("User added successfully !")
         else:
-            await ctx.send('I couldn''t find this wallet into database...')
+            await ctx.send("This wallet already exists, please use $modify_wallet")
 
-    @modify_wallet_cmd.error
+    @change_currency_cmd.error
     async def add_wallet_error(self, ctx, error: commands.CommandError):
         if isinstance(error, commands.ChannelNotFound):
             await ctx.send('I couldn''t find this room...')
@@ -25,4 +25,4 @@ class Modify_wallet(commands.Cog):
             await ctx.send('Command not found...')
 
 def setup(bot):
-    bot.add_cog(Modify_wallet(bot))
+    bot.add_cog(Change_currency(bot))

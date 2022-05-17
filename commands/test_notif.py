@@ -7,7 +7,7 @@ from send_notification import set_message
 class Test_notif(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    @commands.command(name = "test_notif")
+    @commands.command(name = "testnotif")
     async def test_notif_cmd(self, ctx, wallet:str):
         data = f_find_account(wallet)
         if (data == None):
