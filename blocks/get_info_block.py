@@ -16,7 +16,7 @@ def check_if_uncle(blockMiner):
 
 def block_info(height, price_eth):
     rsp_request = request_json(etherscanAPI_blockInfo.replace("BLOCK_ID", str(height)))['result']
-    rsp_request_MPP = request_json()
+    rsp_request_MPP = request_json(MPP_API_block)
 
     for block_info in rsp_request_MPP:
         if (block_info['block_number'] == 14826057):
