@@ -9,7 +9,7 @@ luck_CP:float
 
 #========================== FUNCTION ==========================#
 
-@tasks.loop(seconds=300)
+@tasks.loop(seconds=60)
 async def get_luck(bot):
     global luck_CP
     req = request_json(crazyAPI_stats)
