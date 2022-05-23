@@ -2,7 +2,7 @@ import asyncio
 from discord.ext import commands
 from funct_config import f_find_account
 from lib_discord import set_embed_block, set_base_embed, permission_send_message
-from send_notification import set_message
+from send_notification import set_reward_message
 
 class Test_notif(commands.Cog):
     def __init__(self, bot):
@@ -16,7 +16,7 @@ class Test_notif(commands.Cog):
             message = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n"
             message = message + "Uncle : False\nOrphan : False\nPrice ETH : 666$\nhttps://etherscan.io/block/666"
             message_l = ["Reward : 6.666 ETH", message, 6.666]
-            message = set_message(message_l[1], 1, message_l[2], 6.666)
+            message = set_reward_message(message_l[1], 1, message_l[2], 6.666)
             channel = self.bot.get_channel(data['channel'])
             role_id = "<@&" + str(data['role_id']) + "> Notification test"
             await asyncio.create_task(permission_send_message(ctx.me, channel))
