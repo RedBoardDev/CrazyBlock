@@ -16,25 +16,23 @@ def check_if_uncle(blockMiner):
 
 def block_info(height, price_eth):
     rsp_request = request_json(etherscanAPI_blockInfo.replace("BLOCK_ID", str(height)))['result']
-    rsp_request_MPP = request_json(MPP_API_block)
+    rsp_request_MPP = request_json(MPP_API_block)['data']
 
+    reward = float(rsp_request['blockReward']) / 1000000000000000000
     for block_info in rsp_request_MPP:
-        if (block_info['block_number'] == 14826057):
+        if (block_info['block_number']) == height:
+            luck_block:float = block_info['current_luck_calculated']
             if (block_info['uncle'] == False):
-                MEV_profit:float = block_info['block_mev'] / 1000000000000000000
-                luck_block:float = block_info['current_luck_calculated']
-                reward = float(rsp_request['blockReward']) / 1000000000000000000
+                uncle = "False"
             else:
-                MEV_profit:float = 0
-                luck_block:float = get_luck.luck_CP
                 height = height + 1
                 reward = 1.75
                 uncle = "True"
             break
 
     link = "https://etherscan.io/block/" + (str)(height)
-    message_all = "Reward : " + (str)(round(reward, 9)) + " ETH\nMEV: " + (str)(round(MEV_profit, 2)) + " ETH"
-    message_me = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n" + "Luck : " + (str)(luck_block) + '%\n'
+    message_all = "Reward : " + (str)(round(reward, 9)) + " ETH"
+    message_me = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n" + "Luck : " + (str)(round(luck_block, 2)) + '%\n'
     message_me = message_me + "Uncle : " + uncle + "\nPrice ETH : " + (str)(price_eth) + "$\n" + link
-    message_l = [message_all, message_me, reward + MEV_profit]
+    message_l = [message_all, message_me, reward]
     return (message_l)
