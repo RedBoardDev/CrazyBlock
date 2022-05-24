@@ -48,6 +48,17 @@ def f_add_account(wallet, channel, role_id):
     with open('data.json', 'w') as file:
         json.dump(data, file, indent = 4)
 
+def f_remove_account(wallet:str):
+    with open('data.json', 'r') as file:
+        data = orjson.loads(file.read())
+    for i, node in enumerate(data["account"]):
+        if wallet == node["wallet"]:
+            print(node['wallet'])
+            del data["account"][i]
+            break
+    with open('data.json', 'w') as file:
+        json.dump(data, file, indent = 4)
+
 def f_find_index_account(wallet):
     with open('data.json', 'r') as file:
         data1 = orjson.loads(file.read())
