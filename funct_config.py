@@ -42,7 +42,7 @@ def f_add_account(wallet, channel, role_id):
     node['channel'] = channel
     node['role_id'] = role_id
     node['wallet'] = wallet
-    node['currency'] = 'USD'
+    # node['currency'] = 'USD'
     node['settings'] = {"blocks": True, "payments": True}
     data['account'].append(node)
     with open('data.json', 'w') as file:
@@ -53,7 +53,6 @@ def f_remove_account(wallet:str):
         data = orjson.loads(file.read())
     for i, node in enumerate(data["account"]):
         if wallet == node["wallet"]:
-            print(node['wallet'])
             del data["account"][i]
             break
     with open('data.json', 'w') as file:
