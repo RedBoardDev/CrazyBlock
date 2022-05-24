@@ -10,6 +10,11 @@ bot = commands.Bot(command_prefix = '$', help_command = None)
 
 #========================== MAIN ==========================#
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send("Unknown command, please refer to $help")
+
 load_dotenv()
 TOKEN = os.getenv("TOKEN_CrazyBlock")
 @bot.event
@@ -19,6 +24,7 @@ async def on_ready():
     check_new_payment.start(bot)
     get_luck.start(bot)
 bot.load_extension("commands.add_wallet")
+bot.load_extension("commands.remove_wallet")
 bot.load_extension("commands.test_notif")
 bot.load_extension("commands.find_wallet")
 bot.load_extension("commands.modify_wallet")
