@@ -25,11 +25,6 @@ def f_get_tx():
         data = orjson.loads(file.read())
     return(data['last_tx'])
 
-def f_get_tempLimit():
-    with open("data.json", "r") as file:
-        data = orjson.loads(file.read())
-    return(data['tempLimit'])
-
 def f_get_account():
     with open("data.json", "r") as file:
         data = orjson.loads(file.read())
@@ -42,7 +37,7 @@ def f_add_account(wallet, channel, role_id):
     node['channel'] = channel
     node['role_id'] = role_id
     node['wallet'] = wallet
-    # node['currency'] = 'USD'
+    node['currency'] = 'USD'
     node['settings'] = {"blocks": True, "payments": True}
     data['account'].append(node)
     with open('data.json', 'w') as file:
@@ -99,3 +94,19 @@ def f_set_flags_settings(wallet:str, param:str, flags:bool):
     data['account'][f_find_index_account(wallet)]['settings'] = settings
     with open('data.json', 'w') as file:
         json.dump(data, file, indent = 4)
+
+def f_set_currency(wallet:str, currency:str) -> int:
+    if (currency == 'USD' or currency == 'EUR'):
+        with open('data.json', 'r') as file:
+            data = orjson.loads(file.read())
+        data['account'][f_find_index_account(wallet)]['currency'] = currency
+        with open('data.json', 'w') as file:
+            json.dump(data, file, indent = 4)
+        return (1)
+    return (0)
+
+def f_get_currency(wallet:str) -> str:
+    with open('data.json', 'r') as file:
+        data = orjson.loads(file.read())
+    currency = data['account'][f_find_index_account(wallet)]['currency']
+    return (currency)

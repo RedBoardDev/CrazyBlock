@@ -16,10 +16,10 @@ def get_x_payment(x:int):
 
 async def check_all_tx(bot, req_json):
     address = req_json['address']
-    account = f_find_account(address)
-    if (account != None and account['wallet'] == address):
-        if (account['settings']['payments'] == True):
-            await send_notif_payments(req_json, account, bot)
+    i_account = f_find_account(address)
+    if (i_account != None and i_account['wallet'] == address):
+        if (i_account['settings']['payments'] == True):
+            await send_notif_payments(req_json, i_account, bot)
         return (True)
     else:
         return (False)

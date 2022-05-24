@@ -14,7 +14,7 @@ def get_candidates():
 def check_if_uncle(blockMiner):
     return (blockMiner != "0x4f9bebe3adc3c7f647c0023c60f91ac9dffa52d5")
 
-def block_info(height, price_eth):
+def block_info(height):
     rsp_request = request_json(etherscanAPI_blockInfo.replace("BLOCK_ID", str(height)))['result']
     rsp_request_MPP = request_json(MPP_API_block)['data']
 
@@ -32,7 +32,7 @@ def block_info(height, price_eth):
 
     link = "https://etherscan.io/block/" + (str)(height)
     message_all = "Reward : " + (str)(round(reward, 9)) + " ETH"
-    message_me = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_usd" + "$\n" + "Luck : " + (str)(round(luck_block, 2)) + '%\n'
-    message_me = message_me + "Uncle : " + uncle + "\nPrice ETH : " + (str)(price_eth) + "$\n" + link
+    message_me = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_currency" + "$\n" + "Luck : " + (str)(round(luck_block, 2)) + '%\n'
+    message_me = message_me + "Uncle : " + uncle + "\nPrice ETH : PRICE_ETH $\n" + link
     message_l = [message_all, message_me, reward]
     return (message_l)

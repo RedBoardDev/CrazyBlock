@@ -10,6 +10,7 @@ class Help_command(commands.Cog):
         cmd_list = "$addwallet - add notification account\n"
         cmd_list += "$removewallet - remove notification account\n"
         cmd_list += "$modifywallet - modify your notification account\n"
+        cmd_list += "$setcurrency - modify currency for notification\n"
         cmd_list += "$findwallet - view account information account\n"
         cmd_list += "$testnotif - test notification\n"
         cmd_list += "$setnotif - set settings notification account"
@@ -61,6 +62,14 @@ class Help_command(commands.Cog):
     async def removewallet(self, ctx):
         em = set_base_embed("Help - $removewallet", "$removewallet <wallet>", 0x95a5a6)
         args_list = "wallet - your wallet crazypool recorded\n"
+        em.add_field(name = "Arguments", value = args_list)
+        await ctx.send(embed = em)
+
+    @help.command()
+    async def setcurrency(self, ctx):
+        em = set_base_embed("Help - $setcurrency", "$setcurrency <wallet> <currency>", 0x95a5a6)
+        args_list = "wallet - your wallet crazypool recorded\n"
+        args_list += "currency - choose between USD and EUR\n"
         em.add_field(name = "Arguments", value = args_list)
         await ctx.send(embed = em)
 
