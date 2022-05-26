@@ -9,10 +9,13 @@ luck_CP:float
 
 #========================== FUNCTION ==========================#
 
-@tasks.loop(seconds=60)
+@tasks.loop(seconds = 60)
 async def get_luck(bot):
     global luck_CP
     req = request_json(crazyAPI_stats)
+    if (req == None):
+        await bot.change_presence(activity = Game(name = "API down"))
+        return(None)
     difficulty = req['nodes'][0]['difficulty']
     roundshares = req['stats']['roundShares']
     buff_luck:float = (roundshares / (float)(difficulty)) * 100

@@ -1,26 +1,26 @@
 import json
 import orjson
 
-def f_set_height(height):
+def f_set_height(height:int):
     with open('data.json', 'r') as file:
         data = orjson.loads(file.read())
     data['last_height'] = height
     with open('data.json', 'w') as file:
         json.dump(data, file, indent = 4)
 
-def f_get_height():
+def f_get_height() -> int:
     with open("data.json", "r") as file:
         data = orjson.loads(file.read())
     return(data['last_height'])
 
-def f_set_tx(height):
+def f_set_tx(tx_code:str):
     with open('data.json', 'r') as file:
         data = orjson.loads(file.read())
-    data['last_tx'] = height
+    data['last_tx'] = tx_code
     with open('data.json', 'w') as file:
         json.dump(data, file, indent = 4)
 
-def f_get_tx():
+def f_get_tx() -> str:
     with open("data.json", "r") as file:
         data = orjson.loads(file.read())
     return(data['last_tx'])
@@ -30,7 +30,7 @@ def f_get_account():
         data = orjson.loads(file.read())
     return(data['account'])
 
-def f_add_account(wallet, channel, role_id):
+def f_add_account(wallet:str, channel, role_id):
     with open('data.json', 'r') as file:
         data = orjson.loads(file.read())
     node = {}
@@ -53,7 +53,7 @@ def f_remove_account(wallet:str):
     with open('data.json', 'w') as file:
         json.dump(data, file, indent = 4)
 
-def f_find_index_account(wallet):
+def f_find_index_account(wallet:str) -> int:
     with open('data.json', 'r') as file:
         data1 = orjson.loads(file.read())
         data = data1['account']
@@ -62,7 +62,7 @@ def f_find_index_account(wallet):
             return (x)
     return (None)
 
-def f_modify_account(wallet, channel, role_id):
+def f_modify_account(wallet:str, channel, role_id):
     with open('data.json', 'r') as file:
         data = orjson.loads(file.read())
     node = f_find_account(wallet)
@@ -73,7 +73,7 @@ def f_modify_account(wallet, channel, role_id):
     with open('data.json', 'w') as file:
         json.dump(data, file, indent = 4)
 
-def f_find_account(wallet):
+def f_find_account(wallet:str):
     with open('data.json', 'r') as file:
         data1 = orjson.loads(file.read())
         data = data1['account']

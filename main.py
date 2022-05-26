@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 from blocks.check_new_block import check_new_block
-from check_new_payment import check_new_payment
+from payments.check_new_payment import check_new_payment
 from get_luck import get_luck
 
 #========================== INITIALIZE VARIABLE ==========================#
@@ -21,7 +21,7 @@ TOKEN = os.getenv("TOKEN_CrazyBlock")
 async def on_ready():
     print("Le bot est prêt !")
     check_new_block.start(bot)
-    check_new_payment.start(bot)
+    # check_new_payment.start(bot)
     get_luck.start(bot)
 bot.load_extension("commands.add_wallet")
 bot.load_extension("commands.remove_wallet")
