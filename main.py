@@ -21,7 +21,7 @@ TOKEN = os.getenv("TOKEN_CrazyBlock")
 async def on_ready():
     print("Le bot est prêt !")
     check_new_block.start(bot)
-    # check_new_payment.start(bot)
+    check_new_payment.start(bot)
     get_luck.start(bot)
 bot.load_extension("commands.add_wallet")
 bot.load_extension("commands.remove_wallet")
