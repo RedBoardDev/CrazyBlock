@@ -1,3 +1,4 @@
+from xmlrpc.client import Boolean, boolean
 from discord.ext import tasks
 from get_info import request_json
 from send_notification import send_notif_payments
@@ -8,11 +9,13 @@ crazyAPI_block = 'https://eth.crazypool.org/api/payments'
 
 #========================== FUNCTION ==========================#
 
-def get_x_payment(x):
+def get_payment():
     req_json = request_json(crazyAPI_block)
-    return (req_json['payments'][x])
+    if (req_json == None):
+        return (None)
+    return (req_json['payments'])
 
-async def check_all_tx(bot, req_json):
+async def check_all_tx(bot, req_json) -> bool:
     address = req_json['address']
     account = f_find_account(address)
     if (account != None and account['wallet'] == address):
@@ -22,16 +25,20 @@ async def check_all_tx(bot, req_json):
     else:
         return (False)
 
-@tasks.loop(seconds=120)
+@tasks.loop(seconds = 120)
 async def check_new_payment(bot):
     i:int = 0
     save_tx = f_get_tx()
+    req_json = get_payment()
+    if (req_json == None):
+        return
     while (True):
-        req_json = get_x_payment(i)
-        tx = req_json['tx']
-        if (tx == save_tx):
+        if (i >= len(req_json)):
             break
-        if (await check_all_tx(bot, req_json) == True):
+        tx_code = req_json[i]['tx']
+        if (tx_code == save_tx):
+            break
+        if (await check_all_tx(bot, req_json[i]) == True):
             save_tx = f_get_tx()
         i += 1
-    f_set_tx(get_x_payment(0)['tx'])
+    f_set_tx(get_payment()[0]['tx'])

@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from discord.ext import commands
 from blocks.check_new_block import check_new_block
-from check_new_payment import check_new_payment
+from payments.check_new_payment import check_new_payment
 from get_luck import get_luck
 
 #========================== INITIALIZE VARIABLE ==========================#

@@ -8,8 +8,8 @@ from currency_converter import CurrencyConverter
 
 def convert_usd_to_eur(to_usd:float) -> float:
     c = CurrencyConverter(decimal = True)
-    to_eur = c.convert(to_usd, 'USD', 'EUR')
-    return (to_eur)
+    to_eur = (float)(c.convert(to_usd, 'USD', 'EUR'))
+    return (round(to_eur, 2))
 
 def set_reward_message(message:str, round_share:float, currency:str, reward, price_eth:float) -> str:
     reward_for_me = (round_share * reward) / 100
@@ -18,14 +18,16 @@ def set_reward_message(message:str, round_share:float, currency:str, reward, pri
         price_eth = convert_usd_to_eur(price_eth)
     message = message.replace("PRICE_ETH", str(price_eth))
     message = message.replace("reward_for_me", str(round(reward_for_me, 9)))
-    reward_in_currency:float = reward_for_me * price_eth
+    reward_in_currency:float = (float)(reward_for_me) * (float)(price_eth)
     message = message.replace("reward_in_currency", str(round(reward_in_currency, 2)))
     return (message)
 
 def get_round_share(wallet:str) -> float:
     url = "https://api.crazypool.org/api/v1/eth/miners/" + wallet + "/round-shares"
-    req = request_json(url)['data']
-    return ((float)(req / 3001))
+    req = request_json(url)
+    if (req == None):
+        return (0)
+    return ((float)(req['data'] / 3001))
 
 async def send_notif_block(height, bot):
     account_l = f_get_account()
