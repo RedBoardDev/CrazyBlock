@@ -29,7 +29,7 @@ def block_info(height):
         for block_info in rsp_request_MPP['data']:
             if (block_info['block_number']) == height:
                 luck_block:float = block_info['current_luck_calculated']
-                uncle (str)(block_info['uncle'])
+                uncle = (str)(block_info['uncle'])
     else:
         luck_block:float = get_luck.luck_CP
         uncle = (str)(check_if_uncle(res_request['uncle']))
