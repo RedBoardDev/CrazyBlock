@@ -9,8 +9,7 @@ luck_CP:float
 
 #========================== FUNCTION ==========================#
 
-@tasks.loop(seconds = 60)
-async def get_luck(bot):
+async def set_luck_status(bot):
     global luck_CP
     req = request_json(crazyAPI_stats)
     if (req == None):
@@ -22,3 +21,7 @@ async def get_luck(bot):
     luck_CP = (str)(round(buff_luck, 2))
     luck_str = "Luck: " + luck_CP + "%"
     await bot.change_presence(activity = Game(name = luck_str))
+
+@tasks.loop(seconds = 60)
+async def get_luck(bot):
+    await set_luck_status(bot)
