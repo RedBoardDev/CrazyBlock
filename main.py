@@ -1,6 +1,5 @@
 import os
 from dotenv import load_dotenv
-import update
 from discord.ext import commands
 from blocks.check_new_block import check_new_block
 from payments.check_new_payment import check_new_payment
