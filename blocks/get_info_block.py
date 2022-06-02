@@ -26,7 +26,10 @@ def block_info(height):
     res_request = rsp_request['result']
     luck_block:float = float(get_luck.luck_CP)
     uncle = (str)(check_if_uncle(res_request['blockMiner']))
-    reward = float(res_request['blockReward']) / 1000000000000000000
+    try:
+        reward:float = float(res_request['blockReward']) / 1000000000000000000
+    except:
+        reward:float = 0
     if (rsp_request_MPP != None):
         for block_info in rsp_request_MPP['data']:
             if (block_info['block_number']) == height:
