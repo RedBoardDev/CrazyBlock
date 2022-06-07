@@ -20,7 +20,6 @@ def check_if_uncle(blockMiner):
 def block_info(height):
     rsp_request = request_json(etherscanAPI_blockInfo.replace("BLOCK_ID", str(height)))
     rsp_request_MPP = request_json(MPP_API_block)
-
     if (rsp_request == None):
         return
     res_request = rsp_request['result']
@@ -30,15 +29,14 @@ def block_info(height):
         reward:float = float(res_request['blockReward']) / 1000000000000000000
     except:
         reward:float = 0
-    if (rsp_request_MPP != None):
-        for block_info in rsp_request_MPP['data']:
-            if (block_info['block_number']) == height:
-                luck_block:float = block_info['current_luck_calculated']
-                uncle = (str)(block_info['uncle'])
-                break
     if (uncle == "True"):
         height = height + 1
         reward = 1.75
+    if (rsp_request_MPP != None):
+        for block_info in rsp_request_MPP['data']:
+            if (block_info['block_number'] == height):
+                luck_block:float = block_info['current_luck_calculated']
+                break
     link = "https://etherscan.io/block/" + (str)(height)
     rewar_block:str = "Reward : " + (str)(round(reward, 9)) + " ETH"
     message_me:str = "\nReward perso : " + "reward_for_me" + " | " + "reward_in_currency" + "$\n" + "Luck : " + (str)(round(luck_block, 2)) + '%\n'
