@@ -1,4 +1,3 @@
-from xmlrpc.client import Boolean, boolean
 from discord.ext import tasks
 from get_info import request_json
 from send_notification import send_notif_payments
