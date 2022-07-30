@@ -31,7 +31,7 @@ def block_info(height):
         reward:float = 0
     if (uncle == "True"):
         height = height + 1
-        reward = 1.75
+        # reward = 1.75
     if (rsp_request_MPP != None):
         for block_info in rsp_request_MPP['data']:
             if (block_info['block_number'] == height):
