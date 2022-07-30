@@ -17,11 +17,11 @@ def get_yesterday_date():
     return datetime.strftime(yesterday, '%Y-%m-%d')
 
 def get_price_eth() -> float:
-    try:
-        rsp = request_json(etherscan_priceETH)
-    except requests.exceptions.ConnectionError:
+    rsp = request_json(etherscan_priceETH)
+    if (rsp != None and rsp['status'] != '0'):
+        return ((float)(rsp['result']['ethusd']))
+    else:
         return (0)
-    return ((float)(rsp['result']['ethusd']))
 
 def get_localtime():
     current_time = datetime.now()

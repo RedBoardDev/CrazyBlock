@@ -15,16 +15,5 @@ class Notification(commands.Cog):
         else:
             await ctx.send('We can''t find this notification settings: ', param)
 
-    # @cmd_setnotification.error
-    # async def add_wallet_error(self, ctx, error: commands.CommandError):
-    #     if isinstance(error, commands.ChannelNotFound):
-    #         await ctx.send('I couldn''t find this room...')
-    #     elif isinstance(error, commands.ChannelNotReadable):
-    #         await ctx.send('I don''t have permission to write in this room...')
-    #     elif isinstance(error, commands.MissingRequiredArgument):
-    #             await ctx.send('Error: $add_wallet wallet channel_id role_id')
-    #     elif isinstance(error, commands.CommandNotFound):
-    #         await ctx.send('Command not found...')
-
 def setup(bot):
     bot.add_cog(Notification(bot))

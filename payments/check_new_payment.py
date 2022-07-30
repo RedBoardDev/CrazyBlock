@@ -24,7 +24,7 @@ async def check_all_tx(bot, req_json) -> bool:
     else:
         return (False)
 
-@tasks.loop(seconds = 120)
+@tasks.loop(seconds = 60)
 async def check_new_payment(bot):
     i:int = 0
     save_tx = f_get_tx()

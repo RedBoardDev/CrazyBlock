@@ -5,12 +5,10 @@ from discord.ext import tasks
 
 #========================== INITIALIZE VARIABLE ==========================#
 crazyAPI_stats = 'https://eth.crazypool.org/api/stats'
-luck_CP:float
 
 #========================== FUNCTION ==========================#
 
 async def set_luck_status(bot):
-    global luck_CP
     req = request_json(crazyAPI_stats)
     if (req == None):
         await bot.change_presence(activity = Game(name = "API down"))
