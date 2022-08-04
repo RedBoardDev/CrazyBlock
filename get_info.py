@@ -9,7 +9,8 @@ etherscan_priceETH = 'https://api.etherscan.io/api?module=stats&action=ethprice&
 
 def request_json(url):
     try:
-        return(requests.get(url).json())
+        rsp = requests.get(url)
+        return(rsp.json())
     except requests.exceptions.ConnectionError:
         return (None)
 

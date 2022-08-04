@@ -14,6 +14,6 @@ async def check_new_block(bot):
             height = int(block_l['height'])
             if (height > f_get_height()):
                 f_set_height(height)
-                asyncio.create_task(send_notif_block(height, block_l['hash'], bot))
+                asyncio.create_task(send_notif_block(height, bot))
                 time.sleep(1)
                 await set_luck_status(bot)

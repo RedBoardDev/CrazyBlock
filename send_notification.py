@@ -29,10 +29,10 @@ def get_round_share(wallet:str) -> float:
         return (0)
     return ((float)(req['data'] / 3001))
 
-async def send_notif_block(height, hash:str, bot):
+async def send_notif_block(height, bot):
     account_l = f_get_account()
     price_eth = get_price_eth()
-    message_l = block_info(height, hash)
+    message_l = block_info(height)
     for i in range(len(account_l)):
         i_account = account_l[i]
         if (i_account['settings']['blocks'] == True):
