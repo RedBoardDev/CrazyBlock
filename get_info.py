@@ -10,9 +10,9 @@ etherscan_priceETH = 'https://api.etherscan.io/api?module=stats&action=ethprice&
 def request_json(url):
     try:
         rsp = requests.get(url)
-        return(rsp.json())
     except requests.exceptions.ConnectionError:
         return (None)
+    return(rsp.json())
 
 def get_yesterday_date():
     yesterday = datetime.now() - timedelta(1)

@@ -35,24 +35,19 @@ def get_luck_block(rsp_request_MPP, height:int) -> str:
 def block_info(height:int):
     luck_block:str = '-'
     rsp_request = request_json(etherscanAPI_blockInfo.replace("BLOCK_ID", str(height)))
-    # rsp_request = request_json(crazyAPI_blockbyhash.replace("BLOCK_HASH", hash))
     rsp_request_MPP = request_json(MPP_API_block)
     if (rsp_request == None):
         return
     res_request = rsp_request['result']
-    # res_request = rsp_request['data']
     try:
         reward:float = float(res_request['blockReward']) / 1000000000000000000
     except:
         reward:float = 0
-    # reward:float = float(res_request['reward']) / 1000000000000000000
     uncle = (str)(check_if_uncle(res_request['blockMiner']))
     if (check_if_uncle(res_request['blockMiner']) == 1):
-    # if (res_request['uncle'] == True):
-        height = res_request['uncleHeight']
+        height = height + 1
         uncle = "True"
-        rsp_request_MPP = (float)(rsp_request_MPP['block_reward']) / 1000000000000000000
-        # reward:float = request_json("https://eth.crazypool.org/api/blocks")
+        reward:float = (float)(rsp_request_MPP['data'][0]['block_reward']) / 1000000000000000000
     else:
         uncle = "False"
     luck_block:str = get_luck_block(rsp_request_MPP, height)
