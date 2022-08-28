@@ -1,3 +1,4 @@
+import re
 import requests
 from datetime import datetime, timedelta
 
@@ -8,7 +9,8 @@ etherscan_priceETH = 'https://api.etherscan.io/api?module=stats&action=ethprice&
 
 def request_json(url):
     try:
-        return(requests.get(url).json())
+        rsp = requests.get(url)
+        return(rsp.json())
     except requests.exceptions.ConnectionError:
         return (None)
 
@@ -17,11 +19,11 @@ def get_yesterday_date():
     return datetime.strftime(yesterday, '%Y-%m-%d')
 
 def get_price_eth() -> float:
-    try:
-        rsp = request_json(etherscan_priceETH)
-    except requests.exceptions.ConnectionError:
+    rsp = request_json(etherscan_priceETH)
+    if (rsp != None and rsp['status'] != '0'):
+        return ((float)(rsp['result']['ethusd']))
+    else:
         return (0)
-    return ((float)(rsp['result']['ethusd']))
 
 def get_localtime():
     current_time = datetime.now()
